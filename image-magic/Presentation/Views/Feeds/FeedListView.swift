@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  FeedListView.swift
 //  image-magic
 //
 //  Created by mahi  on 26/04/2025.
@@ -7,7 +7,10 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct FeedListView: View {
+    
+    @StateObject var viewModel: FeedListViewModel
+    
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -20,5 +23,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    FeedListView(viewModel: .init())
 }

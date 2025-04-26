@@ -11,7 +11,7 @@ import SwiftUI
 struct image_magicApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            FeedsCoordinator()
         }
     }
 }

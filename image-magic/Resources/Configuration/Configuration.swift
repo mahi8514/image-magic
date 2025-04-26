@@ -37,7 +37,7 @@ enum APIConfig {
 }
 
 enum APIKeys {
-    static var imgurAPIKey: String {
-        return try! Configuration.value(for: "IMGUR_API_Key")
+    static var imgurClientId: String {
+        return try! Configuration.value(for: "IMGUR_CLIENT_ID")
     }
 }
