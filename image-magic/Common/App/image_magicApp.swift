@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct image_magicApp: App {
+    
     var body: some Scene {
         WindowGroup {
             FeedsCoordinator()

@@ -17,14 +17,11 @@ class APIClient<Target: TargetType> {
     
     private let urlSession: URLSessionProtocol
     private let keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy
-    private let dateDecodingStrategy: JSONDecoder.DateDecodingStrategy
     
     init(urlSession: URLSessionProtocol = URLSession.shared,
-         keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy = .convertFromSnakeCase,
-         dateDecodingStrategy: JSONDecoder.DateDecodingStrategy = .formatted(.yearMonthDayFormatter)) {
+         keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy = .convertFromSnakeCase) {
         self.urlSession = urlSession
         self.keyDecodingStrategy = keyDecodingStrategy
-        self.dateDecodingStrategy = dateDecodingStrategy
     }
     
     func request<T: Decodable>(target: Target) async throws -> T {
@@ -49,10 +46,10 @@ class APIClient<Target: TargetType> {
         do {
             let jsonDecoder = JSONDecoder()
             jsonDecoder.keyDecodingStrategy = keyDecodingStrategy
-            jsonDecoder.dateDecodingStrategy = dateDecodingStrategy
             let decodedResponse = try jsonDecoder.decode(T.self, from: data)
             return decodedResponse
         } catch {
+            print(String(describing: error))
             throw NetworkError.decodingError
         }
     }

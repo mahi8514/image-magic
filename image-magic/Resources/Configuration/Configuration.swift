@@ -32,7 +32,7 @@ struct Configuration {
 /// Access values stored in config.xcconfig.
 enum APIConfig {
     static var baseUrl: String {
-        return try! Configuration.value(for: "BASE_URL")
+        return try! Configuration.value(for: "API_BASE_URL")
     }
 }
 

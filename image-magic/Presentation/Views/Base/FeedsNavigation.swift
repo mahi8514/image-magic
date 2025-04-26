@@ -20,8 +20,18 @@ struct FeedsCoordinator: View {
         }
     }
     
-    private var rootView: some View {
-        FeedListView(viewModel: .init())
+    @ViewBuilder private var rootView: some View {
+        
+        // Composition root
+        let feedsLocalDataSource = DefaultFeedsLocalDataSource(asyncCoreDataFeedStream: AsyncCoreDataFeedStreamImpl())
+        let feedsRemoteDataSource = DefaultFeedRemoteDataSource(remoteStore: FeedRemoteStoreImpl())
+        
+        let feedsRepository = DefaultFeedsRepository(localDataStore: feedsLocalDataSource,
+                                                     remoteDataSource: feedsRemoteDataSource)
+        let observeFeedsUseCase = DefaultObserveFeedsUseCase(feedsRepository: feedsRepository)
+        let refreshFeedsUseCase = DefaultRefreshFeedsUseCase(feedsRepository: feedsRepository)
+        
+        FeedListView(viewModel: .init(observeFeedsUseCase: observeFeedsUseCase, refreshFeedsUseCase: refreshFeedsUseCase))
     }
     
 }
