@@ -22,7 +22,6 @@ struct FeedListView: View {
             LazyVStack {
                 feedListView
             }
-            .padding()
         }
         .refreshable {
             await viewModel.fetchData(reset: true)
@@ -45,6 +44,7 @@ struct FeedListView: View {
                 }
                 Divider()
             }
+            .padding(.horizontal)
             .onAppear {
                 if feed == viewModel.feeds.last {
                     print("Total item: \(viewModel.feeds.count)")

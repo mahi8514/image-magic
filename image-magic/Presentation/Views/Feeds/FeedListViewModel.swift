@@ -51,14 +51,13 @@ final class FeedListViewModel: ViewModel {
     private func fetchFeeds(reset: Bool) async {
         if reset {
             page = 0
-            feeds.removeAll()
         }
         isLoading = true
         defer {
             isLoading = false
         }
         do {
-            try await refreshFeedsUseCase.execute(page: page, resetCache: feeds.isEmpty)
+            try await refreshFeedsUseCase.execute(page: page, resetCache: page == 0)
             self.page += 1
         } catch {
             alertItem = .init(title: "Something went wrong", message: "Unable to fetch feeds. Please try again later.", actions: nil)
