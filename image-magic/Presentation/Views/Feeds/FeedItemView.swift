@@ -28,17 +28,18 @@ struct FeedItemView: View {
                                 .font(.callout)
                                 .foregroundStyle(.secondary)
                                 .lineLimit(1)
+                                .padding(.horizontal, 12)
                             Text(Date(timeIntervalSince1970: feed.datetime).relativeTimeDescription())
                                 .font(.caption)
                                 .foregroundStyle(.tertiary)
+                                .padding(.horizontal, 12)
                         }
                         Spacer()
                     }
                 }
-                .padding(.horizontal)
             }
             
-            Divider().frame(maxWidth: 2)
+            Divider()
         }
     }
     
@@ -54,6 +55,7 @@ struct FeedItemView: View {
             Spacer()
             activityView(iconName: "arrowshape.down", value: feed.downs)
         }
+        .padding(.horizontal, 12)
     }
     
     private func activityView(iconName: String, value: Int) -> some View {
