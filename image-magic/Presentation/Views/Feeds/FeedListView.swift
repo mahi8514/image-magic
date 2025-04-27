@@ -18,39 +18,33 @@ struct FeedListView: View {
     }
     
     private var contentView: some View {
-        ScrollView {
-            LazyVStack {
-                feedListView
+        GeometryReader { proxy in
+            ScrollView {
+                LazyVStack {
+                    feedListView(size: proxy.size)
+                }
             }
-        }
-        .refreshable {
-            await viewModel.fetchData(reset: true)
-        }
-        .overlay {
-            if viewModel.isLoading {
-                ProgressView()
-                    .scaleEffect(1.5)
+            .refreshable {
+                await viewModel.fetchData(reset: true)
+            }
+            .overlay {
+                if viewModel.isLoading {
+                    ProgressView()
+                        .scaleEffect(1.5)
+                }
             }
         }
     }
     
-    private var feedListView: some View {
+    private func feedListView(size: CGSize) -> some View {
         ForEach(viewModel.feeds, id: \.self) { feed in
-            VStack {
-                HStack {
-                    Text(feed.title)
-                        .lineLimit(1)
-                    Spacer()
+            FeedItemView(feed: feed, size: size)
+                .onAppear {
+                    if feed == viewModel.feeds.last {
+                        print("Total item: \(viewModel.feeds.count)")
+                        Task { await viewModel.fetchData(reset: false) }
+                    }
                 }
-                .padding(.horizontal)
-                Divider()
-            }
-            .onAppear {
-                if feed == viewModel.feeds.last {
-                    print("Total item: \(viewModel.feeds.count)")
-                    Task { await viewModel.fetchData(reset: false) }
-                }
-            }
         }
     }
 }

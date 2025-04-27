@@ -37,6 +37,9 @@ final class FeedListViewModel: ViewModel {
                 print("observe feeds task cancelled. Exiting loop.")
                 break
             }
+            if page == 0 {
+                self.feeds.removeAll()
+            }
             self.feeds = feeds
         }
     }
@@ -49,13 +52,12 @@ final class FeedListViewModel: ViewModel {
     }
     
     private func fetchFeeds(reset: Bool) async {
-        if reset {
-            page = 0
-            self.feeds.removeAll()
-        }
         isLoading = true
         defer {
             isLoading = false
+        }
+        if reset {
+            page = 0
         }
         do {
             try await refreshFeedsUseCase.execute(page: page, resetCache: page == 0)

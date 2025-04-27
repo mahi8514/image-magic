@@ -38,6 +38,16 @@ struct Feed: Codable {
             case jpegImage = "image/jpeg"
             case pngImage = "image/png"
             case video = "video/mp4"
+            
+            var isImage: Bool {
+                switch self {
+                case .gifImage, .jpegImage, .pngImage:
+                    return true
+                case .video:
+                    return false
+                }
+            }
+            
         }
     }
 }

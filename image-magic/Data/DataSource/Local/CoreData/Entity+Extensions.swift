@@ -16,7 +16,7 @@ extension FeedEntity {
 
 extension ImageEntity {
     var image: Feed.Image? {
-        guard let id, let title, let type, let link else { return nil }
+        guard let id, let type, let link else { return nil }
         guard let mediaType = Feed.Image.MediaType(rawValue: type) else { return nil }
         return .init(id: id, title: title, datetime: datetime, size: size, type: mediaType, link: link, gifv: gifv)
     }
