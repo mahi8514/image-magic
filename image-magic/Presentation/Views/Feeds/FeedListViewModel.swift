@@ -18,7 +18,7 @@ final class FeedListViewModel: ViewModel {
     }
     
     @Published private(set) var feeds: [Feed] = []
-    private var page: Int = 0
+    var page: Int = 0
     
     private var observeTask: Task<Void, Never>?
     private var fetchTask: Task<Void, Never>?

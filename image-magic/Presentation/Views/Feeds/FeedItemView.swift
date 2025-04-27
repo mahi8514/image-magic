@@ -28,7 +28,7 @@ struct FeedItemView: View {
                                 .font(.callout)
                                 .foregroundStyle(.secondary)
                                 .lineLimit(1)
-                            Text(Date(timeIntervalSince1970: feed.datetime).relativeTimeDescription)
+                            Text(Date(timeIntervalSince1970: feed.datetime).relativeTimeDescription())
                                 .font(.caption)
                                 .foregroundStyle(.tertiary)
                         }

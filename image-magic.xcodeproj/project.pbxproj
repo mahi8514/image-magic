@@ -192,6 +192,7 @@
 					};
 					144CF4692DBCD7410042F48C = {
 						CreatedOnToolsVersion = 16.1;
+						LastSwiftMigration = 1610;
 						TestTargetID = 144CF4592DBCD7400042F48C;
 					};
 					144CF4732DBCD7410042F48C = {
@@ -478,6 +479,7 @@
 			baseConfigurationReferenceRelativePath = Common/Resources/Configuration/Config.xcconfig;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9AM88D337G;
@@ -487,6 +489,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mahin.image-magicTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/image-magic.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/image-magic";
@@ -499,6 +502,7 @@
 			baseConfigurationReferenceRelativePath = Common/Resources/Configuration/Config.xcconfig;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9AM88D337G;
