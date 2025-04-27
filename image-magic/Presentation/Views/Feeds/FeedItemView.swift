@@ -59,7 +59,7 @@ struct MediaContainer: View {
                 if contents.isEmpty {
                     ForEach(medias, id: \.id) { _ in
                         ProgressView()
-                            .frame(width: size.width, height: size.height * 0.5)
+                            .frame(width: size.width, height: size.height * 0.8)
                     }
                 } else {
                     ForEach(contents, id: \.image.id) { content in
@@ -72,7 +72,6 @@ struct MediaContainer: View {
                     }
                 }
             }
-            
         }
         .task {
             await loadMedias()
@@ -83,7 +82,7 @@ struct MediaContainer: View {
         Image(uiImage: image)
             .resizable()
             .scaledToFit()
-            .frame(width: size.width)
+            .frame(width: size.width, height: size.height * 0.8)
     }
     
     private func videoView(avPlayer: AVPlayer) -> some View {

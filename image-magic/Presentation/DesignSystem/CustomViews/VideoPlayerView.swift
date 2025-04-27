@@ -20,21 +20,34 @@ struct VideoPlayerView: View {
                 .frame(width: size.width, height: size.height * 0.8)
                 .allowsHitTesting(false)
                 .onAppear {
-                    checkVisibility(frame: geo.frame(in: .global))
+                    DispatchQueue.main.async {
+                        checkVisibility(frame: geo.frame(in: .global))
+                    }
                 }
-                .onChange(of: geo.frame(in: .global)) { _, frame in
-                    checkVisibility(frame: frame)
+                .onChange(of: geo.frame(in: .global)) { oldFrame, newFrame in
+                    DispatchQueue.main.async {
+                        checkVisibility(frame: newFrame)
+                    }
                 }
         }
         .frame(width: size.width, height: size.height * 0.8)
     }
     
     private func checkVisibility(frame: CGRect) {
-        let screenHeight = UIScreen.main.bounds.height
-        let visibleHeight = max(0, min(frame.maxY, screenHeight) - max(frame.minY, 0))
-        let visibility = visibleHeight / (size.height * 0.8)
-        
-        if visibility >= 0.8 {
+        let visibleHeightLimit = size.height * 0.8
+        let visibleWidthLimit = size.width
+
+        let screen = UIScreen.main.bounds
+
+        let visibleHeight = max(0, min(frame.maxY, screen.maxY) - max(frame.minY, screen.minY))
+        let visibleWidth = max(0, min(frame.maxX, screen.maxX) - max(frame.minX, screen.minX))
+
+        let verticalVisibility = visibleHeight / visibleHeightLimit
+        let horizontalVisibility = visibleWidth / visibleWidthLimit
+
+        let isMostlyVisible = verticalVisibility >= 0.8 && horizontalVisibility >= 0.8
+
+        if isMostlyVisible {
             if !isVisible {
                 player.play()
                 isVisible = true
