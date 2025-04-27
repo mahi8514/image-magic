@@ -51,6 +51,7 @@ final class FeedListViewModel: ViewModel {
     private func fetchFeeds(reset: Bool) async {
         if reset {
             page = 0
+            self.feeds.removeAll()
         }
         isLoading = true
         defer {

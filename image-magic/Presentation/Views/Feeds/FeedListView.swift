@@ -13,7 +13,7 @@ struct FeedListView: View {
     
     var body: some View {
         contentView
-            .navigationTitle("Viral feeds")
+            .navigationTitle("Top feeds")
             .alert(isPresenting: $viewModel.isPresentingAlert, item: $viewModel.alertItem)
     }
     
@@ -42,9 +42,9 @@ struct FeedListView: View {
                         .lineLimit(1)
                     Spacer()
                 }
+                .padding(.horizontal)
                 Divider()
             }
-            .padding(.horizontal)
             .onAppear {
                 if feed == viewModel.feeds.last {
                     print("Total item: \(viewModel.feeds.count)")

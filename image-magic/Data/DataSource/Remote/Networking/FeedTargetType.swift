@@ -20,7 +20,7 @@ enum FeedTargetType: TargetType {
     var path: String {
         switch self {
         case .feeds(let page):
-            return "/3/gallery/hot/time/day/\(page)"
+            return "/3/gallery/user/time/\(page)"
         }
     }
     
