@@ -33,8 +33,8 @@
 		144CF50C2DBD75350042F48C /* Exceptions for "image-magic" folder in "image-magic" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Resources/Configuration/Config.xcconfig,
-				Resources/Info.plist,
+				Common/Resources/Configuration/Config.xcconfig,
+				Common/Resources/Info.plist,
 			);
 			target = 144CF4592DBCD7400042F48C /* image-magic */;
 		};
@@ -288,7 +288,7 @@
 		144CF47C2DBCD7410042F48C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = 144CF45C2DBCD7400042F48C /* image-magic */;
-			baseConfigurationReferenceRelativePath = Resources/Configuration/Config.xcconfig;
+			baseConfigurationReferenceRelativePath = Common/Resources/Configuration/Config.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -353,7 +353,7 @@
 		144CF47D2DBCD7410042F48C /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = 144CF45C2DBCD7400042F48C /* image-magic */;
-			baseConfigurationReferenceRelativePath = Resources/Configuration/Config.xcconfig;
+			baseConfigurationReferenceRelativePath = Common/Resources/Configuration/Config.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -411,17 +411,17 @@
 		144CF47F2DBCD7410042F48C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = 144CF45C2DBCD7400042F48C /* image-magic */;
-			baseConfigurationReferenceRelativePath = Resources/Configuration/Config.xcconfig;
+			baseConfigurationReferenceRelativePath = Common/Resources/Configuration/Config.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"image-magic/Resources/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"image-magic/Common/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 9AM88D337G;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "image-magic/Resources/Info.plist";
+				INFOPLIST_FILE = "image-magic/Common/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -443,17 +443,17 @@
 		144CF4802DBCD7410042F48C /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = 144CF45C2DBCD7400042F48C /* image-magic */;
-			baseConfigurationReferenceRelativePath = Resources/Configuration/Config.xcconfig;
+			baseConfigurationReferenceRelativePath = Common/Resources/Configuration/Config.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"image-magic/Resources/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"image-magic/Common/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 9AM88D337G;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "image-magic/Resources/Info.plist";
+				INFOPLIST_FILE = "image-magic/Common/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -475,7 +475,7 @@
 		144CF4822DBCD7410042F48C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = 144CF45C2DBCD7400042F48C /* image-magic */;
-			baseConfigurationReferenceRelativePath = Resources/Configuration/Config.xcconfig;
+			baseConfigurationReferenceRelativePath = Common/Resources/Configuration/Config.xcconfig;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -496,7 +496,7 @@
 		144CF4832DBCD7410042F48C /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = 144CF45C2DBCD7400042F48C /* image-magic */;
-			baseConfigurationReferenceRelativePath = Resources/Configuration/Config.xcconfig;
+			baseConfigurationReferenceRelativePath = Common/Resources/Configuration/Config.xcconfig;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -517,7 +517,7 @@
 		144CF4852DBCD7410042F48C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = 144CF45C2DBCD7400042F48C /* image-magic */;
-			baseConfigurationReferenceRelativePath = Resources/Configuration/Config.xcconfig;
+			baseConfigurationReferenceRelativePath = Common/Resources/Configuration/Config.xcconfig;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -536,7 +536,7 @@
 		144CF4862DBCD7410042F48C /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = 144CF45C2DBCD7400042F48C /* image-magic */;
-			baseConfigurationReferenceRelativePath = Resources/Configuration/Config.xcconfig;
+			baseConfigurationReferenceRelativePath = Common/Resources/Configuration/Config.xcconfig;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
