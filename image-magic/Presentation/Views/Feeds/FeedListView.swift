@@ -20,7 +20,7 @@ struct FeedListView: View {
     private var contentView: some View {
         GeometryReader { proxy in
             ScrollView {
-                LazyVStack {
+                LazyVStack(spacing: 0) {
                     feedListView(size: proxy.size)
                 }
             }

@@ -16,17 +16,53 @@ struct FeedItemView: View {
     @State private var loadedImage: UIImage? = nil
     
     var body: some View {
-        VStack {
-            VStack(alignment: .leading) {
+        VStack(spacing: 26) {
+            VStack(alignment: .leading, spacing: 8) {
                 MediaContainer(medias: feed.images ?? [], size: size)
-                Text(feed.title)
-                    .font(.callout)
-                    .lineLimit(1)
-                    .padding(.horizontal)
+                
+                VStack(spacing: 8) {
+                    activitiesView
+                    HStack {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(feed.title)
+                                .font(.callout)
+                                .foregroundStyle(.secondary)
+                                .lineLimit(1)
+                            Text(Date(timeIntervalSince1970: feed.datetime).relativeTimeDescription)
+                                .font(.caption)
+                                .foregroundStyle(.tertiary)
+                        }
+                        Spacer()
+                    }
+                }
+                .padding(.horizontal)
             }
             
-            Divider()
+            Divider().frame(maxWidth: 2)
         }
+    }
+    
+    private var activitiesView: some View {
+        HStack(spacing: 0) {
+            activityView(iconName: "eye", value: feed.views)
+            Spacer()
+            activityView(iconName: "bubble", value: feed.commentCount)
+            Spacer()
+            activityView(iconName: "heart", value: feed.favoriteCount)
+            Spacer()
+            activityView(iconName: "arrowshape.up", value: feed.ups)
+            Spacer()
+            activityView(iconName: "arrowshape.down", value: feed.downs)
+        }
+    }
+    
+    private func activityView(iconName: String, value: Int) -> some View {
+        VStack(spacing: 4) {
+            Image(systemName: iconName)
+            Text(String(value))
+        }
+        .font(.caption)
+        .foregroundStyle(.blue)
     }
 }
 
