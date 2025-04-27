@@ -23,11 +23,9 @@ struct FeedsCoordinator: View {
     @ViewBuilder private var rootView: some View {
         
         // Composition root
-        let feedsLocalDataSource = DefaultFeedsLocalDataSource(asyncCoreDataFeedStream: AsyncCoreDataFeedStreamImpl())
-        let feedsRemoteDataSource = DefaultFeedRemoteDataSource(remoteStore: FeedRemoteStoreImpl())
         
-        let feedsRepository = DefaultFeedsRepository(localDataStore: feedsLocalDataSource,
-                                                     remoteDataSource: feedsRemoteDataSource)
+        let feedsRepository = DefaultFeedsRepository(localDataStore: DefaultFeedsLocalDataSource(),
+                                                     remoteDataSource: DefaultFeedRemoteDataSource())
         let observeFeedsUseCase = DefaultObserveFeedsUseCase(feedsRepository: feedsRepository)
         let refreshFeedsUseCase = DefaultRefreshFeedsUseCase(feedsRepository: feedsRepository)
         

@@ -8,7 +8,7 @@
 extension FeedEntity {
     var feed: Feed? {
         guard let id, let title else { return nil }
-        let imageEntities = images?.array as? [ImageEntity] ?? []
+        let imageEntities = images?.allObjects as? [ImageEntity] ?? []
         let feedImages = imageEntities.compactMap { $0.image }
         return .init(id: id, title: title, description: feedDescription, datetime: datetime, views: Int(views), ups: Int(ups), downs: Int(downs), commentCount: Int(commentCount), favoriteCount: Int(favoriteCount), images: feedImages)
     }

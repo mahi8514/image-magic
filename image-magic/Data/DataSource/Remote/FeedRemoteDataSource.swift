@@ -9,16 +9,11 @@ protocol FeedRemoteDataSource {
     func fetchFeeds(page: Int) async throws -> [Feed]
 }
 
-final class DefaultFeedRemoteDataSource: FeedRemoteDataSource {
-    
-    let remoteStore: FeedRemoteStore
-    
-    init(remoteStore: FeedRemoteStore) {
-        self.remoteStore = remoteStore
-    }
+final class DefaultFeedRemoteDataSource: APIClient<FeedTargetType>, FeedRemoteDataSource {
     
     func fetchFeeds(page: Int) async throws -> [Feed] {
-        try await remoteStore.feeds(page: page).data ?? []
+        let response: Response<[Feed]> = try await request(target: .feeds(page: page))
+        return response.data ?? []
     }
     
 }

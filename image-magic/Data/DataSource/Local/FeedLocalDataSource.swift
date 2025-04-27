@@ -12,18 +12,54 @@ protocol FeedLocalDataSource {
     func save(_ feeds: [Feed], resetCache: Bool) async throws
 }
 
-final class DefaultFeedsLocalDataSource: FeedLocalDataSource {
+final class DefaultFeedsLocalDataSource: NSObject, FeedLocalDataSource {
     
-    let asyncCoreDataFeedStream: AsyncCoreDataFeedStream
-    let viewContext: NSManagedObjectContext
+    private let viewContext: NSManagedObjectContext
+    private var fetchedResultsController: NSFetchedResultsController<FeedEntity>!
+    private var continuation: FeedsAsyncStream.Continuation?
     
-    init(asyncCoreDataFeedStream: AsyncCoreDataFeedStream) {
-        self.asyncCoreDataFeedStream = asyncCoreDataFeedStream
+    private lazy var stream: FeedsAsyncStream = {
+        AsyncStream { (continuation: FeedsAsyncStream.Continuation) -> Void in
+            self.continuation = continuation
+        }
+    }()
+    
+    override init() {
         self.viewContext = CoreDataStack.shared.persistentContainer.viewContext
+        super.init()
+        setupFetchController()
+        destroyContinuationOnTermination()
+    }
+    
+    private func setupFetchController() {
+        let fetchRequest: NSFetchRequest<FeedEntity> = FeedEntity.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \FeedEntity.datetime, ascending: false)]
+        fetchedResultsController = NSFetchedResultsController(
+            fetchRequest: fetchRequest,
+            managedObjectContext: viewContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
+        fetchedResultsController.delegate = self
+        
+        try? fetchedResultsController.performFetch()
+    }
+    
+    private func destroyContinuationOnTermination() {
+        self.continuation?.onTermination = { result in
+            print(result)
+            self.continuation = nil
+        }
     }
     
     func observeFeeds() -> FeedsAsyncStream {
-        asyncCoreDataFeedStream.observeFeeds()
+        AsyncStream { continuation in
+            self.continuation = continuation
+            if let fetchedObjects = self.fetchedResultsController.fetchedObjects {
+                let feeds = fetchedObjects.compactMap(\.feed)
+                continuation.yield(feeds)
+            }
+        }
     }
     
     func save(_ feeds: [Feed], resetCache: Bool) async throws {
@@ -38,6 +74,15 @@ final class DefaultFeedsLocalDataSource: FeedLocalDataSource {
             feeds.setFeedsEntity(in: viewContext)
             try viewContext.save()
         }
+    }
+    
+}
+
+extension DefaultFeedsLocalDataSource: NSFetchedResultsControllerDelegate {
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<any NSFetchRequestResult>) {
+        guard let fetchedObjects = fetchedResultsController.fetchedObjects else { return }
+        continuation?.yield(fetchedObjects.compactMap(\.feed))
     }
     
 }
@@ -72,7 +117,7 @@ extension Array where Element == Feed {
                 imageEntities.append(imageEntity)
             }
             
-            entity.images = NSOrderedSet(array: imageEntities)
+            entity.images = NSSet(array: imageEntities)
         }
     }
 }
