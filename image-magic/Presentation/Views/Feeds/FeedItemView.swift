@@ -54,25 +54,25 @@ struct MediaContainer: View {
     @State private var contents: [ResolvedContent] = []
     
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 0) {
-                if contents.isEmpty {
-                    ForEach(medias, id: \.id) { _ in
-                        ProgressView()
-                            .frame(width: size.width, height: size.height * 0.8)
-                    }
-                } else {
-                    ForEach(contents, id: \.image.id) { content in
-                        switch content.type {
-                        case .image(let image):
-                            imageView(image: image)
-                        case .video(let player):
-                            videoView(avPlayer: player)
-                        }
+        TabView {
+            if contents.isEmpty {
+                ForEach(medias, id: \.id) { _ in
+                    ProgressView()
+                        .frame(width: size.width, height: size.height * 0.8)
+                }
+            } else {
+                ForEach(contents, id: \.image.id) { content in
+                    switch content.type {
+                    case .image(let image):
+                        imageView(image: image)
+                    case .video(let player):
+                        videoView(avPlayer: player)
                     }
                 }
             }
         }
+        .tabViewStyle(.page(indexDisplayMode: medias.count > 1 ? .always : .never))
+        .frame(width: size.width, height: size.height * 0.8)
         .task {
             await loadMedias()
         }
@@ -81,7 +81,7 @@ struct MediaContainer: View {
     private func imageView(image: UIImage) -> some View {
         Image(uiImage: image)
             .resizable()
-            .scaledToFit()
+            .scaledToFill()
             .frame(width: size.width, height: size.height * 0.8)
     }
     
